@@ -26,12 +26,3 @@
     "vite": "^7.1.2"
   }
 }
-{
-  "scripts": {
-    "build": "react-scripts build",  // For Create React App
-    // OR
-    "build": "npm run build",        // Alternative
-    // OR if using Vite
-    "build": "vite build"
-  }
-}
