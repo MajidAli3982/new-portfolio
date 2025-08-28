@@ -383,3 +383,143 @@ a {
     font-size: 1rem;
   }
 }
+/* ----- Base ----- */
+:root{
+  --bg: #071a2c;
+  --card: #0d2742;
+  --text: #e8f1ff;
+  --muted: #b8c6dd;
+  --accent1: #00e0ff;
+  --accent2: #ffd000;
+}
+
+*{ box-sizing: border-box; }
+body{ margin:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+/* ----- Section ----- */
+.hero{
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* soft glass overlay */
+.overlay{
+  position:absolute; inset:0;
+  background: radial-gradient(1000px 600px at 20% 10%, rgba(255,255,255,0.05), transparent 40%),
+              radial-gradient(900px 700px at 90% 80%, rgba(255,255,255,0.04), transparent 50%);
+  pointer-events:none;
+}
+
+/* colorful animated blobs */
+.blob{
+  position:absolute; filter: blur(60px); opacity:.5; mix-blend-mode: screen;
+  width: 380px; height: 380px; border-radius: 50%;
+  animation: float 12s ease-in-out infinite;
+}
+.b1{ background: linear-gradient(135deg, var(--accent1), #6cf9d8); top:-80px; left:-80px; animation-delay: .5s; }
+.b2{ background: linear-gradient(135deg, #ff6bd5, var(--accent2)); bottom:-120px; right:-120px; animation-delay: 1.2s; }
+
+@keyframes float{
+  0%,100%{ transform: translateY(0) translateX(0) scale(1); }
+  50%{ transform: translateY(-20px) translateX(10px) scale(1.05); }
+}
+
+/* ----- Content ----- */
+.hero-inner{
+  position: relative;
+  z-index: 2;
+  width: min(980px, 92vw);
+  background: linear-gradient(180deg, rgba(13,39,66,0.75), rgba(13,39,66,0.45));
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 56px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+  text-align: center;
+}
+
+.kicker{
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+  opacity: 0; animation: fadeIn .9s ease forwards .1s;
+}
+
+.title{
+  font-size: clamp(28px, 6vw, 50px);
+  margin: 6px 0 10px;
+  line-height: 1.15;
+  opacity: 0; transform: translateY(8px);
+  animation: rise .9s ease forwards .25s;
+}
+
+.gradient{
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.typing{
+  font-size: clamp(18px, 3.6vw, 26px);
+  font-weight: 600;
+  width: 22ch;             /* typing width */
+  margin: 8px auto 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid var(--accent1);
+  animation: typing 3s steps(22) 0.6s forwards, caret 650ms steps(1) infinite;
+  opacity: 0;             /* show when typing starts */
+}
+
+.subtitle{
+  color: var(--muted);
+  margin: 12px auto 22px;
+  max-width: 60ch;
+  opacity: 0; transform: translateY(6px);
+  animation: rise .9s ease forwards .6s;
+}
+
+.cta{
+  display:flex; gap:12px; justify-content:center; flex-wrap: wrap;
+  opacity: 0; transform: translateY(6px);
+  animation: rise .9s ease forwards .75s;
+}
+
+.btn{
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn.primary{ background: linear-gradient(90deg, var(--accent1), #6cf9d8); color:#06202f; }
+.btn.ghost{ background: transparent; color: var(--text); }
+.btn:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,0.35); }
+
+/* ----- Animations ----- */
+@keyframes typing{
+  0%   { width: 0; opacity:1; }
+  100% { width: 22ch; opacity:1; }
+}
+@keyframes caret{
+  0%, 100% { border-color: transparent; }
+  50%      { border-color: var(--accent1); }
+}
+@keyframes rise{
+  to { opacity:1; transform: translateY(0); }
+}
+@keyframes fadeIn{
+  to { opacity:1; }
+}
+
+/* ----- Responsive tweaks ----- */
+@media (max-width: 640px){
+  .hero-inner{ padding: 24px; text-align: left; }
+  .cta{ justify-content: flex-start; }
+  .typing{ width: 20ch; } /* shorter for small screens */
+}
+
