@@ -1,8 +1,6 @@
-
-
 {
   "name": "my-react-app",
-     "public":"true",
+  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
